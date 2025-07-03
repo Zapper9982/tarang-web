@@ -37,14 +37,23 @@ export default async function Events({ params: { event } }) {
 }
 
 export async function getStaticPaths() {
-  const eventDetails = await getAllEvents();
-  const events = eventDetails.data.events;
-  return {
-    paths: events.map((event) => ({
-      params: { event: event.slug },
-    })),
-    fallback: false,
-  };
+  try {
+    const eventDetails = await getAllEvents();
+    const events = eventDetails.data.events;
+    return {
+      paths: events.map((event) => ({
+        params: { event: event.slug },
+      })),
+      fallback: 'blocking', // Changed from false to blocking
+    };
+  } catch (error) {
+    console.error("Failed to fetch events for static paths:", error);
+    // Return empty paths and use fallback
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
 }
 
 export const generateMetadata = async ({ params }) => {

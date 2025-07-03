@@ -28,7 +28,7 @@ export default function User() {
             const regex = new RegExp(value)
             setUsers(globalUsers.filter(usr => usr.tarang_id.match(regex)));
         }
-    }, [value]);
+    }, [value, globalUsers]); // Added globalUsers dependency
 
     const rows = (currentPage) => {
 

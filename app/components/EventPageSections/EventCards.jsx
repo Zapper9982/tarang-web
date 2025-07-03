@@ -16,7 +16,7 @@ export default function EventCards({ selectedEvents, events }) {
       srcArr.splice(6,0,'c_scale,w_15');
       srcArr.splice(7,0,'f_auto');
       setMinSrc(srcArr.join('/'));
-    }, [])
+    }, [event.images.mainPhone]) // Added mainPhone dependency
     
     return (
       <Link href={`/events/${event.slug}`}>

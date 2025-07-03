@@ -40,7 +40,7 @@ export default function EventGuidelines({ event }) {
         ...oldGuidelines,
       ]);
     }
-  }, []);
+  }, [event.judging_criteria]); // Added judging_criteria dependency
 
   return (
     <Stack

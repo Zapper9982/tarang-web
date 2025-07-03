@@ -14,7 +14,7 @@ export default function User({ params: { user } }) {
 
   useEffect(() => {
     getUsers();
-  }, [])
+  }, [user]) // Added user dependency
 
   return (
     <ValidateAuth>

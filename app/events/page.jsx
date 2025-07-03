@@ -13,15 +13,28 @@ export const metadata = {
 };
 
 export default async function Events() {
-  const eventDetails = await getAllEvents();
-  const events = eventDetails.data.events;
+  try {
+    const eventDetails = await getAllEvents();
+    const events = eventDetails.data.events;
 
-  return (
-    <>
-      <MainAppShell>
-        <HeroSection />
-        <EventMain events={events} />
-      </MainAppShell>
-    </>
-  );
+    return (
+      <>
+        <MainAppShell>
+          <HeroSection />
+          <EventMain events={events} />
+        </MainAppShell>
+      </>
+    );
+  } catch (error) {
+    console.error("Failed to fetch events:", error);
+    // Fallback UI when API fails
+    return (
+      <>
+        <MainAppShell>
+          <HeroSection />
+          <EventMain events={[]} />
+        </MainAppShell>
+      </>
+    );
+  }
 }
